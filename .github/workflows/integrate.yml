@@ -9,19 +9,21 @@ jobs:
   parallel-run:
     name: Parallel Test
     runs-on: ubuntu-latest
+    continue-on-error: false
     strategy:
       matrix:
         # force CI to sping 3 copies
         # of the current job in parallel
         machines: [1, 2, 3]
+        node-version: [12]
     steps:
       - name: Checkout to Current Branch
       - uses: actions/checkout@v2
 
-      - name: Use Node.js 12
+      - name: Use Node.js ${{ matrix.node-version }}
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: ${{ matrix.node-version }}
 
       - name: Install NPM Dependencies
       - run: npm ci
