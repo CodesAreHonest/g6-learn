@@ -1,1 +1,5 @@
-{}
+{
+  "pageLoadTimeout": 100000,
+  "video": false,
+  "screenshotOnRunFailure": false
+}
