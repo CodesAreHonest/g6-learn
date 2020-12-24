@@ -1,4 +1,4 @@
-name: Cypress e2e tests
+name: Continuous Integration
 
 # trigger checks when pull request is open
 on:
@@ -6,24 +6,17 @@ on:
     branches: [main]
 
 jobs:
-  parallel-run:
-    name: Parallel Test
+  unit:
+    name: Jest Unit Test
     runs-on: ubuntu-latest
-    continue-on-error: false
-    strategy:
-      matrix:
-        # force CI to sping 3 copies
-        # of the current job in parallel
-        machines: [1, 2, 3]
-        node-version: [12]
     steps:
       - name: Checkout to Current Branch
         uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 12
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 12
 
       - name: Install NPM Dependencies
         run: npm ci
@@ -31,11 +24,8 @@ jobs:
       - name: Run Unit Test
         run: npm test
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          parallel: true
-          group: Batch Actions
-          build: npm run build
-          start: npm run start
-          wait-on: http://localhost:3000
+      # - name: Cypress run
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     start: npm start
+      #     wait-on: "http://localhost:3000"
