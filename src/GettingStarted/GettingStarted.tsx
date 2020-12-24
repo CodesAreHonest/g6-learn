@@ -8,10 +8,9 @@
  - Render the custom React components of tooltip and ContextMenu.
  **/
 
-import { useEffect, useRef } from 'react';
-import { findDOMNode} from "react-dom";
+import { useEffect, useRef } from "react";
 import { data } from "./data";
-import G6, { Graph } from '@antv/g6';
+import G6, { Graph } from "@antv/g6";
 
 type GraphRef = Graph | null;
 type ContainerRef = HTMLDivElement | null;
@@ -28,27 +27,27 @@ const GettingStarted = () => {
         width: 1200,
         height: 800,
         modes: {
-          default: ['drag-canvas'],
+          default: ["drag-canvas"],
         },
         layout: {
-          type: 'dagre',
-          direction: 'LR',
+          type: "dagre",
+          direction: "LR",
         },
         defaultNode: {
-          type: 'node',
+          type: "node",
           labelCfg: {
             style: {
-              fill: '#000000A6',
+              fill: "#000000A6",
               fontSize: 10,
             },
           },
           style: {
-            stroke: '#72CC4A',
+            stroke: "#72CC4A",
             width: 150,
           },
         },
         defaultEdge: {
-          type: 'polyline',
+          type: "polyline",
         },
       });
     }
@@ -57,6 +56,6 @@ const GettingStarted = () => {
   }, []);
 
   return <div ref={containerRef} />;
-}
+};
 
 export default GettingStarted;
