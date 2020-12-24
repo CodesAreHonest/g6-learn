@@ -6,35 +6,26 @@ on:
     branches: [main]
 
 jobs:
-  parallel-run:
+  e2e:
     name: Parallel Test
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        # force CI to sping 3 copies
-        # of the current job in parallel
-        machines: [1, 2, 3]
     steps:
       - name: Checkout to Current Branch
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Use Node.js 12
-      - uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
           node-version: 12
 
       - name: Install NPM Dependencies
-      - run: npm ci
+        run: npm ci
 
       - name: Run Unit Test
-      - run: npm test
+        run: npm test
 
       - name: Cypress run
       - uses: cypress-io/github-action@v2
       - with:
-          record: true
-          parallel: true
-          group: Batch Actions
-          build: npm run build
-          start: npm run start
-          wait-on: http://localhost:3000
+          start: npm start
+          wait-on: "http://localhost:3000"
