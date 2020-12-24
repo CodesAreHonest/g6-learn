@@ -18,22 +18,22 @@ jobs:
         node-version: [12]
     steps:
       - name: Checkout to Current Branch
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
-      - uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Install NPM Dependencies
-      - run: npm ci
+        run: npm ci
 
       - name: Run Unit Test
-      - run: npm test
+        run: npm test
 
       - name: Cypress run
-      - uses: cypress-io/github-action@v2
-      - with:
+        uses: cypress-io/github-action@v2
+        with:
           parallel: true
           group: Batch Actions
           build: npm run build
