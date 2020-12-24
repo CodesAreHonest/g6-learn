@@ -55,7 +55,7 @@ const GettingStarted = () => {
     graphRef.current.render();
   }, []);
 
-  return <div ref={containerRef} id="getting-started" />;
+  return <div ref={containerRef} />;
 };
 
 export default GettingStarted;
