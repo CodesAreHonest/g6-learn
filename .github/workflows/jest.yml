@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Automation Unit Test
 
 # trigger checks when pull request is open
 on:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   unit:
-    name: Jest Unit Test
+    name: Jest
     runs-on: ubuntu-latest
     steps:
       - name: Checkout to Current Branch
