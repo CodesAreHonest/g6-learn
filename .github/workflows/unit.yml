@@ -1,6 +1,4 @@
-name: Automation Unit Test
-
-# trigger checks when pull request is open
+name: Unit Test
 on:
   pull_request:
     branches: [main]
