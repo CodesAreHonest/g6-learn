@@ -1,20 +1,40 @@
-name: Node Continuous Integration
+name: Cypress e2e tests
 
+# trigger checks when pull request is open
 on:
   pull_request:
     branches: [main]
 
 jobs:
-  test_pull_request:
+  parallel-run:
+    name: Parallel Test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # force CI to sping 3 copies
+        # of the current job in parallel
+        machines: [1, 2, 3]
     steps:
-      # checkout to current branch
+      - name: Checkout to Current Branch
       - uses: actions/checkout@v2
 
-      # setup node version
+      - name: Use Node.js 12
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+
+      - name: Install NPM Dependencies
       - run: npm ci
+
+      - name: Run Unit Test
       - run: npm test
-      - run: npm run build
+
+      - name: Cypress run
+      - uses: cypress-io/github-action@v2
+      - with:
+          record: true
+          parallel: true
+          group: Batch Actions
+          build: npm run build
+          start: npm run start
+          wait-on: http://localhost:3000
