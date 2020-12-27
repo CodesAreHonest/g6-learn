@@ -15,6 +15,6 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-export default (_, config: Cypress.PluginConfig) => {
+export default (_: any, config: Cypress.PluginConfig) => {
   return config;
-}
+};
